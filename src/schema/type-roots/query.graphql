@@ -1,0 +1,12 @@
+"Array types defintions"
+type Query{
+    users: ResultUsers
+    
+    login(email: String!, password:String!):ResultLogin
+
+    "autenticar token"
+    me: ResultUser 
+
+    "mostrar lista de productos"
+    products: Boolean
+}

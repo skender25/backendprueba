@@ -1,0 +1,7 @@
+"Especificar propiedades"
+interface Result{
+    "Estado de la operacion "
+    status: Boolean!
+    message: String!
+    
+}
