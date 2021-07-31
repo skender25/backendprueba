@@ -57,6 +57,7 @@ const resolversUserQuery: IResolvers ={
                             !passCheck 
                             ?null
                             :new JWT().sign({ user }),
+                    user        
                 };
             } catch (error) {
                 console.log(error);
