@@ -9,7 +9,8 @@ export const SECRET_KEY = process.env.SECRET || 'MercadoSecretDona1452';
 
 
 export enum COLLECTIONS{
-    USERS ='users'
+    USERS ='users',
+    PRODUCTS= 'products'
 }
 
 export enum MESSAGES{

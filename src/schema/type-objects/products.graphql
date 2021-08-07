@@ -1,0 +1,5 @@
+type Products implements Item {
+    id: ID!
+    name: String!
+    productor: String!
+}

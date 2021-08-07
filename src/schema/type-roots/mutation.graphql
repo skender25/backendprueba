@@ -1,3 +1,6 @@
  type Mutation{
     register(user: UserInput!): ResultUser
+    addProducts(product: String! , productor: String! , ): ResultProducts
+    updateProducts(id: ID! ,product: String! , ): ResultProducts
+    deleteProducts(id: ID!): ResultProducts
 }

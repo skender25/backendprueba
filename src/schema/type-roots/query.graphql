@@ -8,5 +8,8 @@ type Query{
     me: ResultUser 
 
     "mostrar lista de productos"
-    products: Boolean
+    
+    products:ResultProducts 
+
+    product(id: ID!): ResultProducts
 }

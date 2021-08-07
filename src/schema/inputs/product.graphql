@@ -1,0 +1,6 @@
+input ProductInput{
+    id: ID
+    name: String!
+    productor: String!
+   
+}

@@ -1,26 +1,23 @@
-import { IUser } from './../interfaces/user.interface';
-import { MESSAGES, SECRET_KEY, EXPIRETIME } from './../config/constans';
+import { IJwt } from './../interfaces/jwt.interface';
+import { SECRET_KEY, MESSAGES, EXPIRETIME } from './../config/constans';
 import jwt from 'jsonwebtoken';
-import { IJwt } from '../interfaces/jwt.interface';
 
 class JWT {
-
     private secretKey = SECRET_KEY as string;
-
-
-    sign(data: IJwt ){
+    // Informaci´pn del payload con fecha de caducidad 24 horas por defecto
+    sign(data: IJwt, expiresIn: number = EXPIRETIME.H24 ) {
         return jwt.sign(
-            { user: data.user},
+            { user: data.user },
             this.secretKey,
-            { expiresIn: 24* 60 * 60}
+            { expiresIn} 
         );
     }
 
-    verify(token: string){
+    verify(token: string) {
         try {
-            return jwt.verify(token,this.secretKey);
+            return jwt.verify(token, this.secretKey);
         } catch (e) {
-          return MESSAGES ; 
+            return MESSAGES.TOKEN_VERIFICATION_FAILED;
         }
     }
 }

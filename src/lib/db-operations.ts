@@ -17,6 +17,23 @@ export const asigDocumentId = async (
   return lastElement[0].id + 1;
 };
 
+export const asignDocumentId = async (
+  database: Db,
+  collection: string,
+  sort: object = { registerDate: -1 }
+) => {
+  const lastElement = await database
+    .collection(collection)
+    .find()
+    .limit(1)
+    .sort(sort)
+    .toArray();
+  if (lastElement.length === 0) {
+    return '1';
+  }
+  return String(+lastElement[0].id + 1);
+};
+
 
 export const findOneElement = async (
    database: Db,
@@ -27,6 +44,25 @@ export const findOneElement = async (
             .collection(collection)
             .findOne(filter);
 
+};
+
+export const updateOneElement = async (
+  database: Db,
+  collection: string,
+  filter: object,
+  updateObject: object
+) => {
+  return await database
+    .collection(collection)
+    .updateOne(filter, { $set: updateObject });
+};
+
+export const deleteOneElement = async (
+  database: Db,
+  collection: string,
+  filter: object = {}
+) => {
+  return await database.collection(collection).deleteOne(filter);
 };
 
 export const insertOneElement = async (
