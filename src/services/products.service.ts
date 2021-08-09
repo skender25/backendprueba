@@ -12,8 +12,12 @@ class ProductsService extends ResolversOperationsService {
     }
 
     async items() {
-        const result = await this.list(this.collection, 'productos');
-        return { status: result.status, message: result.message, products: result.items };
+        const page = this.getVariables().pagination?.page;
+        const itemsPage = this.getVariables().pagination?.itemsPage;
+        console.log(this.getVariables().pagination);
+        console.log(page, itemsPage);
+        const result = await this.list(this.collection, 'productos',page, itemsPage);
+        return { info: result.info , status: result.status, message: result.message, products: result.items };
     }
 
     async details() {
@@ -42,10 +46,11 @@ class ProductsService extends ResolversOperationsService {
         }
         // Si valida las opciones anteriores, venir aquí y crear el documento
         const productObject = {
-            id: await asignDocumentId(this.getDb(), this.collection, { id: -1}),
+            id: await asignDocumentId(this.getDb(), this.collection, {  _id: -1}),
             name: product,
             productor: slugify(productor || '', { lower: true })
         };
+        console.log(productObject)
         const result = await this.add(this.collection, productObject, 'productos');
         return { status: result.status, message: result.message, product: result.item };
     }

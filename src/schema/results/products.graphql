@@ -1,4 +1,5 @@
 type ResultProducts implements Result{
+    info: ResultInfo
     "Estado de la operación"
     status: Boolean!
     "Mensaje de la operación para dar feedback"

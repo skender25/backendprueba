@@ -9,6 +9,7 @@ import {
 } from './../lib/db-operations';
 import { Db } from 'mongodb';
 import { IVariables } from '../interfaces/variables.interface';
+import { pagination } from '../lib/pagination';
 
 class ResolversOperationsService {
   private variables: IVariables;
@@ -27,15 +28,25 @@ class ResolversOperationsService {
   }
 
   // Listar información
-  protected async list(collection: string, listElement: string) {
+  protected async list(collection: string, listElement: string ,page: number = 1, itemsPage: number = 20) {
     try {
+      console.log(page, itemsPage);
+      const paginationData = await pagination(this.getDb(), collection, page, itemsPage);
+      console.log(paginationData);
       return {
+        info: {
+          page: paginationData.page,
+          pages: paginationData.pages,
+          itemsPage: paginationData.itemsPage,
+          total: paginationData.total
+        },
         status: true,
         message: `Lista de ${listElement} correctamente cargada`,
-        items: await findElements(this.getDb(), collection),
+        items: await findElements(this.getDb(), collection, {}, paginationData),
       };
     } catch (error) {
       return {
+        info: null,
         status: false,
         message: `Lista de ${listElement} no cargada: ${error}`,
         items: null,

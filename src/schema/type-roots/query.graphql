@@ -1,6 +1,6 @@
 "Array types defintions"
 type Query{
-    users: ResultUsers
+    users(page: Int = 1, itemsPage: Int = 20): ResultUsers
     
     login(email: String!, password:String!):ResultLogin
 
@@ -9,7 +9,7 @@ type Query{
 
     "mostrar lista de productos"
     
-    products:ResultProducts 
+    products(page: Int = 1, itemsPage: Int = 20):ResultProducts 
 
     product(id: ID!): ResultProducts
 }
